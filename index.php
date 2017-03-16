@@ -13,6 +13,9 @@
   case 'Contacto':
     $Contenido = "";
     break;
+  case 'Cita':
+    $Contenido = "./Views/cita_view.php";
+    break;
     
   default:
     $Contenido= "./Views/inicio_view.php";

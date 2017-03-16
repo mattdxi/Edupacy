@@ -5,12 +5,10 @@
 <!-- NAVBAR
 ================================================== -->
   <body>
-    <div class="navbar-wrapper">
        <ol class="breadcrumb">
               <li><a href="./index.html">Inicio</a></li>
               <li class="active">Tramites</li>
-            </ol>
-    </div>
+        </ol>
       <div class="container-fluid table-tramite">
         <h1>Tramites</h1>
         <table class="table table-hover">

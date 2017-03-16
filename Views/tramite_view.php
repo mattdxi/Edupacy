@@ -5,13 +5,11 @@
 <!-- NAVBAR
 ================================================== -->
   <body>
-    <div class="navbar-wrapper">
        <ol class="breadcrumb">
               <li><a href="../index.php">Inicio</a></li>
               <li><a href="./Tramites_controller.php">Tramites</a></li>
               <li class="active">Registro de Nacimiento</li>
-            </ol>
-    </div>
+       </ol>
       
     <!-- Marketing messaging and featurettes
     ================================================== -->
@@ -43,7 +41,7 @@
                 echo "</li>";
               }
               echo "</ol>";
-              echo "<center><a class='btn btn-primary {$Estado}' href='#' role='button'>Agendar Cita</a></center>";
+              echo "<center><a class='btn btn-primary {$Estado}' href='?Opcion=Cita' role='button'>Agendar Cita</a></center>";
           ?>
       </div>
   </body>
