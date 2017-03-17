@@ -41,7 +41,7 @@ $(document).ready(function(){
        if(cal != ''){
             $.ajax({
                 data: { fecha : cal },
-                url:   './hora2.php',
+                url:   './Controller/hora_controller.php',
                 type:  'POST',
                 dataType: 'json',
                 beforeSend: function () 
@@ -63,7 +63,7 @@ $(document).ready(function(){
                 },
                 error: function()
                 {
-                    alert('Ocurrio un error al obtener el horario\n Porfavor intentelo mas tarde ..');
+                    alert('Ocurrio un error al obtener el horario,Porfavor intentelo mas tardes');
                     //alumnos.prop('disabled', false);
                 }
             });
