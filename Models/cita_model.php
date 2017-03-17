@@ -1,46 +1,36 @@
 <?php
 require_once("./db/db.php");
-class tramite_model{
+class cita_model{
     private $db;
-    private $tramite;
-    private $requisitos;
-    private $mensaje = array(
-    "tramite" => "Ningun Tramite Seleccionado",
-    "especificacion" => "Porfavor seleccione un tramite en la seccion de tramites",
-    "estado" => "0"
-    );
-    private $mensaje2 = array("Descripcion" => "Ningun Tramite Seleccionado",
-    );
+    private $cita;
+    private $horario
  
     public function __construct(){
         $this->db=Conectar::conexion();
-        $this->tramite=array();
+        $this->cita=array();
         $this->requisitos=array();
     }
-    public function get_tramite($id_tramite){
-        if (empty($id_tramite)) {
+    public function set_cita($id_tramite){
+        
+        /*if (!empty($id_tramite)) {
             return $this->mensaje;
-        }else{
+        }else{*/
             $id = mysqli_real_escape_string($this->db, $id_tramite);
             $consulta=$this->db->query("select * from tramites where id=".$id.";");
             while($filas=$consulta->fetch_assoc()){
                 $this->tramite[]=$filas;
             }
             return $this->tramite;
-        }
+        //}
         
     }
-    public function get_requisitos($id_tramite){
-        if (empty($id_tramite)) {
-            return $this->mensaje2;
-        }else{
-            $id = mysqli_real_escape_string($this->db, $id_tramite);
+    public function get_cita($id_tramite){
+        $id = mysqli_real_escape_string($this->db, $id_tramite);
             $consulta=$this->db->query("select Descripcion from Req_tramite where id_tramite=".$id.";");
             while($filas=$consulta->fetch_assoc()){
                 $this->requisitos[]=$filas;
             }
             return $this->requisitos;
-        }
     }
 }
 ?>

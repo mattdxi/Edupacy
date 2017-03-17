@@ -1,15 +1,17 @@
 <?php
+//determinamos el tipo de archivo JSON
 header("Content-Type: application/json");
+//Recuperamos la fecha a buscar para horarios
 $fechaconsulta = $_POST['fecha'];
-//$fechaconsulta = '2017-03-08';
-
+//Determinamos los horarios para poder sacar el intervalo de horarios
 $entrada = '07:00:00';
 $salida = '14:00:00';
+$recesoSalida = '14:00:00';
+$recesoEntrada = '16:00:00';
 
-/*$recesoSalida = '14:00:00';
-$recesoEntrada = '16:00:00';*/
-
+//Determinamos el intervalo que tomara cada tramite
 $intervalo = 30;
+
 $hostname="localhost";
 $username="root";
 $password="";
@@ -34,8 +36,6 @@ $horaEntrada = mktime($EntradaHR, $EntradaMIN, $EntradaSEG, 0, 0, 0);
 
 list($SalidaHR, $SalidaMIN, $SalidaSEG) = explode(":", $salida);
 $horaSalida = mktime($SalidaHR, $SalidaMIN, $SalidaSEG, 0, 0, 0);
-
-//echo '<select name="select" id="select">';
 $Horario = array();
 $returnH = array();
 for($i=$horaEntrada; $i<=$horaSalida ; $i+=$convierte ){
@@ -53,10 +53,8 @@ foreach ($Horario as $hora) {
 	}
 	if ($T==1) {
 		$returnH[] = date('H:i',$hora);
-		//echo '<option value="VALOR">'.date('H:i', $hora).'</option>';
 	}
 
 }
 echo json_encode($returnH);
-//echo '</select>';
 ?>

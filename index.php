@@ -23,7 +23,7 @@
   }
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -40,7 +40,6 @@
 
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <link href="./Views/assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
-
     <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
     <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
     <script src="./Views/assets/js/ie-emulation-modes-warning.js"></script>
@@ -93,11 +92,13 @@
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script>window.jQuery || document.write('<script src="./Views/assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="./Views/dist/js/bootstrap.min.js"></script>
     <!-- Just to make our placeholder images work. Don't actually copy the next line! -->
     <script src="./Views/assets/js/vendor/holder.min.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="./Views/assets/js/ie10-viewport-bug-workaround.js"></script>
+    <script src="./Views/js/calendario.js"></script>
   </body>
 <?php
 //require_once("Views/inicio_view.php");

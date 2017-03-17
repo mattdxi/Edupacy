@@ -1,6 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
   <head>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   </head>
   <body>
        <ol class="breadcrumb">
@@ -14,10 +15,16 @@
                 <h3 class="panel-title">Paso 1: Seleccion de Fecha y Hora</h3>
               </div>
               <div class="panel-body">
-                
-            </div>
-        </div>
-        <div class="panel panel-primary">
+                <div id="datepicker"></div>
+                <div class="col-sm-2">
+                  <div class="form-group">
+                    <label>Seleccione un Horario</label>
+                    <select id="slt-horarios" class="form-control"></select>
+                  </div> 
+                </div>
+              </div>
+          </div>
+          <div class="panel panel-primary">
               <div class="panel-heading">
                 <h3 class="panel-title">Paso 2: Llena tus Datos</h3>
               </div>
@@ -53,7 +60,7 @@
                 </div>
               </form>
             </div>
-        </div>
+          </div>
       </div>
   </body>
 </html>
