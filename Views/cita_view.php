@@ -15,11 +15,17 @@
                 <h3 class="panel-title">Paso 1: Seleccion de Fecha y Hora</h3>
               </div>
               <div class="panel-body">
-                <div id="datepicker"></div>
+                <div id="datepicker"></div><br>
                 <div class="col-sm-2">
-                  <div class="form-group">
+                  <div class="form-group form-inline">
                     <label>Seleccione un Horario</label>
                     <select id="slt-horarios" class="form-control"></select>
+                  </div> 
+                </div>
+                <div class="col-sm-4">
+                  <div class="form-group">
+                    <input class="btn btn-primary" type="button" value="Reservar Horario">
+                    <input class="btn btn-warning" type="button" value="Cambiar Horario">
                   </div> 
                 </div>
               </div>

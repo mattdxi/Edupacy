@@ -33,7 +33,7 @@
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
 
-    <title>Tramite</title>
+    <title>Registro Civil</title>
 
     <!-- Bootstrap core CSS -->
     <link href="./Views/dist/css/bootstrap.min.css" rel="stylesheet">
