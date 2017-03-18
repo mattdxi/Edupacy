@@ -99,6 +99,7 @@
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="./Views/assets/js/ie10-viewport-bug-workaround.js"></script>
     <script src="./Views/js/calendario.js"></script>
+    <script src="./Views/js/citas.js"></script>
   </body>
 <?php
 //require_once("Views/inicio_view.php");

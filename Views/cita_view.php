@@ -9,7 +9,8 @@
               <li><a href="?Opcion=Tramites">Tramites</a></li>
               <li class="active">Cita</li>
         </ol>
-      <div class="container-fluid">
+        <div class="container-fluid">
+           <div id="mensaje"></div>
           <div class="panel panel-primary">
               <div class="panel-heading">
                 <h3 class="panel-title">Paso 1: Seleccion de Fecha y Hora</h3>
@@ -35,23 +36,23 @@
                 <h3 class="panel-title">Paso 2: Llena tus Datos</h3>
               </div>
               <div class="panel-body">
-              <form class="form-horizontal">
+              <form class="form-horizontal" onsubmit="return Verificar()">
                 <div class="form-group">
                   <label class="col-sm-2 control-label">Solicitante:</label>
                   <div class="col-sm-2">
-                      <input type="text" class="form-control" placeholder="Nombres">
+                      <input id="Nombres" type="text" class="form-control" placeholder="Nombres">
                   </div>
                   <div class="col-sm-2">
-                      <input type="text" class="form-control" placeholder="Apellido Paterno">
+                      <input id="ApellidoP" type="text" class="form-control" placeholder="Apellido Paterno">
                   </div>
                   <div class="col-sm-2">
-                      <input type="text" class="form-control" placeholder="Apellido Materno">
+                      <input id="ApellidoM" type="text" class="form-control" placeholder="Apellido Materno">
                   </div>
                 </div>
                 <div class="form-group">
                   <label class="col-sm-2 control-label">Telefono</label>
                   <div class="col-sm-6">
-                      <input type="tel" class="form-control" placeholder="Celular" pattern="[0-9]{10}">
+                      <input type="tel" id="Celular" class="form-control" placeholder="Celular" pattern="[0-9]{10}">
                   </div>
                 </div>
                 <div class="form-group">
