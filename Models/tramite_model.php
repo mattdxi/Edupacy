@@ -18,7 +18,6 @@ class tramite_model{
         $this->requisitos=array();
     }
     public function get_tramite($id_tramite){
-        $this->db=Conectar::conexion();
         if (empty($id_tramite)) {
             return $this->mensaje;
         }else{

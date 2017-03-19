@@ -36,8 +36,9 @@
                 <h3 class="panel-title">Paso 2: Llena tus Datos</h3>
               </div>
               <div class="panel-body">
-              <form class="form-horizontal" onsubmit="return Verificar()">
+              <div class="form-horizontal" onsubmit="return Verificar()">
                 <input type="hidden" value="<?php echo $_GET['Tramite']?>" id="id_tramite">
+                <input type="hidden" value="" id="id_cita">
                 <div class="form-group">
                   <label class="col-sm-2 control-label">Solicitante:</label>
                   <div class="col-sm-2">
@@ -66,7 +67,7 @@
                     </center>
                   </div>
                 </div>
-              </form>
+              </div>
             </div>
           </div>
       </div>

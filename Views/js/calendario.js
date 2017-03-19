@@ -19,17 +19,49 @@ function imprimir(){
 $(document).ready(function(){
   // Bloqueamos el SELECT de los cursos
   $("#slt-horarios").prop('disabled', true);
+    // Hacemos la lógica que cuando nuestro calendario cambie de valor haga algo
+    $("#datepicker").change(function(){
+        // Guardamos el select de cursos
+        var horarios = $("#slt-horarios");
 
-//codigo alternativo para el change function del datepicker
-  /*$(".datepicker").datepicker({
-    onSelect: function(dateText) {
-      //display("Selected date: " + dateText + "; input's current value: " + this.value);
-      var horarios = $("#slt-horarios");
-      var cal = dateText;
-      alert(cal);
-    }
-  });*/
-
+        // Guardamos el select de alumnos
+        var id_tramite = document.getElementById('id_tramite').value;
+        var cal = $.datepicker.formatDate( "yy-mm-dd", $( "#datepicker" ).datepicker( "getDate" ) );//$(this);
+       if(cal != '' && id_tramite !=''){
+            $.ajax({
+                data: {
+                  fecha : cal,
+                  id : id_tramite
+                },
+                url:   './Controller/hora_controller.php',
+                type:  'POST',
+                dataType: 'json',
+                beforeSend: function ()
+                {
+                    //alumnos.prop('disabled', true);
+                },
+                success:  function (r)
+                {
+                    //alumnos.prop('disabled', false);
+                    // Limpiamos el select
+                    horarios.find('option').remove();
+                    $(r).each(function(i, v){ // indice, valor
+                        horarios.append('<option value="' + v + '">' + v+ '</option>');
+                    })
+                    horarios.prop('disabled', false);
+                },
+                error: function()
+                {
+                  Mensaje("Ocurrio un error al obtener el horario, Porfavor intentelo mas tardes");
+                }
+            });
+        }
+        else
+        {
+            horarios.find('option').remove();
+            horarios.prop('disabled', true);
+        }
+    });
 
     // Hacemos la lógica que cuando nuestro SELECT cambia de valor haga algo
     $("#datepicker").change(function(){
@@ -78,4 +110,55 @@ $(document).ready(function(){
             horarios.prop('disabled', true);
         }
     });
+
 });
+
+function Verificar(){
+	nombre = document.getElementById('Nombres').value;
+	AParterno = document.getElementById('ApellidoP').value;
+	AMaterno = document.getElementById('ApellidoM').value;
+	telefono = document.getElementById('Celular').value;
+	if( nombre == null || nombre.length == 0 || /^\s+$/.test(nombre)) {
+		Mensaje("");
+	 	return false;
+	}else if (AParterno == null || AParterno.length == 0 || /^\s+$/.test(AParterno) ) {
+		Mensaje("");
+		return false;
+	}else if (AMaterno == null || AMaterno.length == 0 || /^\s+$/.test(AMaterno) ) {
+		Mensaje("");
+		return false;
+	}else if (telefono == null || telefono.length == 0 || /^\s+$/.test(telefono) || isNaN(telefono)) {
+		Mensaje("");
+		return false;
+	}
+	if (nombre.length > 50) {
+		Mensaje("Nombres demasiados largos");
+		return false;
+	}
+	if ((AParterno.length + AMaterno.length) > 30) {
+		Mensaje("Apellidos demasiados largos");
+		return false;
+	}
+	if (telefono.length > 10) {
+		Mensaje("El numero de telefono debe contener solo 10 digitos");
+		return false;
+	}else if (telefono.length < 10) {
+		Mensaje("El numero de telefono debe conterner al menos 10 digitos")
+		return false;
+	}
+	return true;
+}
+function Mensaje(Msj){
+	if (Msj.length == 0) {
+		document.getElementById("mensaje").innerHTML = "<div class='alert alert-danger'>"+
+			"<a href='#' class='close' data-dismiss='alert'>&times;</a>"+
+	        "<strong>Error:</strong> Verifica tus datos.</div>";
+	}else {
+		document.getElementById("mensaje").innerHTML = "<div class='alert alert-danger'>"+
+			"<a href='#' class='close' data-dismiss='alert'>&times;</a>"+
+	        "<strong>Error:</strong> "+Msj+"</div>";
+	}
+}
+//Agregar verificacion de limites de caracteres que soporta la bd
+//checar expresiones regulares en javascript
+//verificar y cerrar las conexiones despues de las consultas a las bd

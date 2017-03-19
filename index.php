@@ -1,4 +1,4 @@
-<?php 
+<?php
   $op = $_GET["Opcion"];
   switch ($op) {
     case 'Tramites':
@@ -14,9 +14,9 @@
     $Contenido = "";
     break;
   case 'Cita':
-    $Contenido = "./Views/cita_view.php";
+    $Contenido = "./Controller/cita_controller.php";
     break;
-    
+
   default:
     $Contenido= "./Views/inicio_view.php";
     break;
@@ -79,7 +79,7 @@
       </div>
     </div>
   	<div class="Contenido">
-      <?php 
+      <?php
         include($Contenido);
       ?>
   	</div>

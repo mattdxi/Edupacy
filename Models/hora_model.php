@@ -16,7 +16,6 @@ class hora_model{
         on cita.id_tramites = tramites.id INNER JOIN departamento on departamento.id_depa=tramites.id_departamento
         where departamento.id_depa=(SELECT tramites.id_departamento from tramites WHERE tramites.id={$id}) and fecha='{$fecha}';";
         $consulta=$this->db->query($query);
-        //$consulta=$this->db->query("select * from cita WHERE fecha='".$fecha."';");
         while($filas=$consulta->fetch_assoc()){
         	$reservas = $filas["hora"]; //OBTENGO LA HORAS HORAS RESERVADAS EN LA BASE DE DATOS
   			$horaocupada = $reservas;
