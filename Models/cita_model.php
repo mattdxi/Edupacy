@@ -39,17 +39,32 @@ class cita_model{
       $nombres= mysqli_real_escape_string($this->db, $nombres_);
       $apellidos= mysqli_real_escape_string($this->db, $apellidos_);
       $telefono= mysqli_real_escape_string($this->db, $telefonos_);
-      $query = "update cita set nombres={$nombres}, apellidos={$apellidos}, telefono={$telefono}
+      $query = "update cita set nombres='{$nombres}', apellidos='{$apellidos}', telefono={$telefono}
       where id_cita={$id};";
       $consulta=$this->db->query($query);
-      if ($consulta->affected_rows > 0) {
-        mysqli_free_result($consulta);
-        mysqli_close($this->db);
-        return 1;        //si la consulta fue correcta nos devuelve 1
+      if (($this->db->affected_rows) > 0) {
+        $this->mensaje['id_cita'] = $id_cita;
+        $this->mensaje['estado'] = 1;
+        return $this->mensaje;        //si la consulta fue correcta nos devuelve 1
       }
-      mysqli_free_result($consulta);
-      mysqli_close($this->db);
-      return 0;                       //Si no, nos devuelve el valor 0
+      $this->mensaje['id_cita'] = $id_cita;
+      $this->mensaje['estado'] = 0;
+      return $this->mensaje;                       //Si no, nos devuelve el valor 0
+    }
+    public function update_horario_cita($id_cita, $fecha_,$hora_){
+      $id= mysqli_real_escape_string($this->db, $id_cita);
+      $fecha= mysqli_real_escape_string($this->db, $fecha_);
+      $hora= mysqli_real_escape_string($this->db, $hora_);
+      $query = "update cita set fecha='{$fecha}', hora='{$hora}' where id_cita={$id};";
+      $consulta=$this->db->query($query);
+      if (($this->db->affected_rows) > 0) {
+        $this->mensaje['id_cita'] = $id;
+        $this->mensaje['estado'] = 1;
+        return $this->mensaje;        //si la consulta fue correcta nos devuelve 1
+      }
+      $this->mensaje['id_cita'] = $id;
+      $this->mensaje['estado'] = 0;
+      return $this->mensaje;                       //Si no, nos devuelve el valor 0
     }
     public function update_cita2($id_cita, $nombres_, $apellidos_, $telefonos_, $fecha_,$hora_, $id_tramite){
       $fecha= mysqli_real_escape_string($this->db, $fecha_);
@@ -59,17 +74,17 @@ class cita_model{
       $nombres= mysqli_real_escape_string($this->db, $nombres_);
       $apellidos= mysqli_real_escape_string($this->db, $apellidos_);
       $telefono= mysqli_real_escape_string($this->db, $telefonos_);
-      $query = "update cita set nombres={$nombres}, apellidos={$apellidos}, telefono={$telefono}, fecha='{$fecha}',
+      $query = "update cita set nombres='{$nombres}', apellidos='{$apellidos}', telefono={$telefono}, fecha='{$fecha}',
       hora='{$hora}', id_tramite={$id_tramite} where id_cita={$id};";
       $consulta=$this->db->query($query);
-      if ($consulta->affected_rows > 0) {
-        mysqli_free_result($consulta);
-        mysqli_close($this->db);
-        return 1;                      //si la consulta fue correcta nos devuelve 1
+      if (($this->db->affected_rows) > 0) {
+        $this->mensaje['id_cita'] = $id_cita;
+        $this->mensaje['estado'] = 1;
+        return $this->mensaje;                      //si la consulta fue correcta nos devuelve 1
       }
-      mysqli_free_result($consulta);
-      mysqli_close($this->db);
-      return 0;                       //Si no, nos devuelve el valor 0
+      $this->mensaje['id_cita'] = $id_cita;
+      $this->mensaje['estado'] = 0;
+      return $this->mensaje;                       //Si no, nos devuelve el valor 0
     }
     public function get_cita($id_cita){
         $id = mysqli_real_escape_string($this->db, $id_tramite);
@@ -85,13 +100,13 @@ class cita_model{
         $id = mysqli_real_escape_string($this->db, $id_tramite);
         $consulta=$this->db->query("delete from cita where id_cita={$id};");
         if ($consulta->affected_rows > 0) {
-          mysqli_free_result($consulta);
-          mysqli_close($this->db);
-          return 1;                 //si la consulta fue correcta nos devuelve 1
+          $this->mensaje['id_cita'] = $id_cita;
+          $this->mensaje['estado'] = 1;
+          return $this->mensaje;                 //si la consulta fue correcta nos devuelve 1
         }
-        mysqli_free_result($consulta);
-        mysqli_close($this->db);
-        return 0;                 //Si no, nos devuelve el valor 0
+        $this->mensaje['id_cita'] = $id_cita;
+        $this->mensaje['estado'] = 0;
+        return $this->mensaje;                //Si no, nos devuelve el valor 0
     }
 }
 ?>

@@ -14,7 +14,9 @@ $(function() {
   });
 });
 $(document).ready(function(){
-  // Bloqueamos el SELECT de los cursos
+  $("#Registro").click(function(){
+    Verificar();
+  });
   $("#slt-horarios").prop('disabled', true);
   $("#Reservar").prop('disabled', true);
   $("#Cambiar").prop('disabled', true);
@@ -36,7 +38,6 @@ $(document).ready(function(){
                 dataType: 'json',
                 beforeSend: function ()
                 {
-                    //alumnos.prop('disabled', true);
                 },
                 success:  function (r)
                 {
@@ -66,53 +67,83 @@ $(document).ready(function(){
         var horarios = $("#slt-horarios");
         var hora2 = $("#slt-horarios").val();
         var Op = 1;
+        var Op2 = document.getElementById('op');
         var id_tramite2 = document.getElementById('id_tramite').value;
+        var id_cita2 = document.getElementById('id_cita').value;
         var cal = $.datepicker.formatDate( "yy-mm-dd", $( "#datepicker" ).datepicker( "getDate" ) );
-       if(cal != '' && id_tramite2 !='' && hora2 != ''){
-            $.ajax({
-                data: {
-                  fecha : cal,
-                  id_tramite : id_tramite2,
-                  hora : hora2,
-                  Opcion : Op
-                },
-                url:   './Controller/cita_controller.php',
-                type:  'POST',
-                dataType: 'json',
-                beforeSend: function ()
-                {
-                },
-                success:  function (r)
-                {
-                  console.log(r);
-                  if (r['estado'] == 1) {
-                    $("#id_cita").val(r['id_cita']);
-                    alert("Tiene 2 min para completar el formulario");
-                    $("#Cambiar").prop('disabled', false);
-                    $("#Reservar").prop('disabled', true);
-                    horarios.prop('disabled', true);
-                    $( "#datepicker" ).datepicker( "option", "disabled", true );
-                  }else if (r['estado'] == 0) {
-                    Mensaje("Horario ya ocupado por otro usuario, Porfavor intentelo con otra hora");
-                    horarios.find('option').remove();
-                    horarios.prop('disabled', true);
-                    $("#Reservar").prop('disabled', true);
+        if (Op2.value == 6) {
+          Op2.value="";
+          if(cal != '' && hora2 != '' && id_cita2 !=''){
+              $.ajax({
+                  data: {
+                    fecha : cal,
+                    id_cita : id_cita2,
+                    hora : hora2,
+                    Opcion : 6
+                  },
+                  url:   './Controller/cita_controller.php',
+                  type:  'POST',
+                  dataType: 'json',
+                  beforeSend: function ()
+                  {
+                  },
+                  success:  function (r)
+                  {
+                    Verificar_Respuesta(r);
+                  },
+                  error: function()
+                  {
+                    Mensaje("Ocurrio un error al conectar con el servidor, Porfavor intentelo mas tarde");
                   }
-                },
-                error: function()
-                {
-                  Mensaje("Ocurrio un error al conectar con el servidor, Porfavor intentelo mas tarde");
-                }
-            });
+              });
 
-        }
-        else
-        {
-            horarios.find('option').remove();
-            horarios.prop('disabled', true);
+          }
+          else
+          {
+              horarios.find('option').remove();
+              horarios.prop('disabled', true);
+          }
+        }else{
+          if(cal != '' && id_tramite2 !='' && hora2 != ''){
+              $.ajax({
+                  data: {
+                    fecha : cal,
+                    id_tramite : id_tramite2,
+                    hora : hora2,
+                    Opcion : Op
+                  },
+                  url:   './Controller/cita_controller.php',
+                  type:  'POST',
+                  dataType: 'json',
+                  beforeSend: function ()
+                  {
+                  },
+                  success:  function (r)
+                  {
+                    Verificar_Respuesta(r);
+                  },
+                  error: function()
+                  {
+                    Mensaje("Ocurrio un error al conectar con el servidor, Porfavor intentelo mas tarde");
+                  }
+              });
+
+          }
+          else
+          {
+              horarios.find('option').remove();
+              horarios.prop('disabled', true);
+          }
         }
     });
-
+    $("#Cambiar").click(function(){
+        $('#op').val(6);
+        $("#Reservar").prop('disabled', true);
+        $("#Cambiar").prop('disabled', true);
+        $("#datepicker").datepicker("enable");
+        $("#slt-horarios").find('option').remove();
+        $("#slt-horarios").prop('disabled', true);
+    });
 });
 
 function Verificar(){
@@ -160,6 +191,22 @@ function Mensaje(Msj){
 			"<a href='#' class='close' data-dismiss='alert'>&times;</a>"+
 	        "<strong>Error:</strong> "+Msj+"</div>";
 	}
+  $('html, body').animate({ scrollTop: 0 }, 'slow');
+}
+function Verificar_Respuesta(R){
+  r = R;
+  if (r['estado'] == 1) {
+    $("#id_cita").val(r['id_cita']);
+    alert("Tiene 2 min para completar el formulario");
+    $("#Cambiar").prop('disabled', false);
+    $("#Reservar").prop('disabled', true);
+    $("#slt-horarios").prop('disabled', true);
+    $("#datepicker").datepicker("disable");
+  }else if (r['estado'] == 0) {
+    Mensaje("Horario ya ocupado por otro usuario, Porfavor intentelo con otra hora");
+    $("#slt-horarios").find('option').remove();
+    $("#slt-horarios").prop('disabled', true);
+  }
 }
 //Agregar verificacion de limites de caracteres que soporta la bd
 //checar expresiones regulares en javascript

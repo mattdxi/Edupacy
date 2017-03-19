@@ -39,6 +39,7 @@
               <div class="form-horizontal">
                 <input type="hidden" value="<?php echo $_GET['Tramite']?>" id="id_tramite">
                 <input type="hidden" value="" id="id_cita">
+                <input type="hidden" value="" id="op">
                 <div class="form-group">
                   <label class="col-sm-2 control-label">Solicitante:</label>
                   <div class="col-sm-2">

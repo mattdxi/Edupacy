@@ -36,6 +36,9 @@ if(empty($Op)) {
     case '5':
       $resultado = $cita->delete_cita($id_cita);
       break;
+    case '6':
+      $resultado = $cita->update_horario_cita($id_cita,$fecha, $hora);
+      break;
   }
   echo json_encode($resultado);
 }
