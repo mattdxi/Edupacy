@@ -1,0 +1,16 @@
+//devuelve las horas disponibles segun el departamento
+
+select id_cita,fecha, hora, nombre, especificacion from cita inner join tramites
+on cita.id_tramites = tramites.id INNER JOIN departamento on departamento.id_depa=tramites.id_departamento
+where departamento.id_depa=(SELECT tramites.id_departamento from tramites WHERE tramites.id=1) and fecha='2017-03-08'
+
+
+//inserta un nuevo registro solo si no existe uno con los mismo parametros
+INSERT INTO cita (fecha, hora, id_tramites, nombres)
+SELECT * FROM (SELECT '2017-03-20', '09:30:00', '1', 'miguel') AS tmp
+WHERE NOT EXISTS (
+    select id_cita,fecha, hora, nombre, especificacion from cita inner join tramites
+    on cita.id_tramites = tramites.id INNER JOIN departamento on departamento.id_depa=tramites.id_departamento
+    where departamento.id_depa=(SELECT tramites.id_departamento from tramites WHERE tramites.id=1)
+    and fecha='2017-03-20' and hora='09:30:00'
+) LIMIT 1;

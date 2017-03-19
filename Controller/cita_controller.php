@@ -12,8 +12,6 @@ if (empty($id)) {
 }else{
 	$falta_id="no";
 }
-//$datos=$tramite->get_tramite($id);
-//$reqs = $tramite->get_requisitos($id);
 //Llamada a la vista
 require_once("./Views/cita_view.php");
 ?>

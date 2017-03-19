@@ -3,7 +3,7 @@
   <head>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   </head>
-  <body>
+  <body >
        <ol class="breadcrumb">
               <li><a href="/index.php">Inicio</a></li>
               <li><a href="?Opcion=Tramites">Tramites</a></li>
@@ -37,6 +37,7 @@
               </div>
               <div class="panel-body">
               <form class="form-horizontal" onsubmit="return Verificar()">
+                <input type="hidden" value="<?php echo $_GET['Tramite']?>" id="id_tramite">
                 <div class="form-group">
                   <label class="col-sm-2 control-label">Solicitante:</label>
                   <div class="col-sm-2">

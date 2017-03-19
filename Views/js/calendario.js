@@ -5,7 +5,7 @@ if (now.getDay() == 4 || now.getDay() == 5) {
 }
 $(function() {
   $( "#datepicker" ).datepicker({
-    minDate: +1, 
+    minDate: +1,
     maxDate: MaxDia,
     beforeShowDay: $.datepicker.noWeekends,
     dayNamesMin: [ "Dom", "Lun", "Mar", "Mie", "Jue", "Vie", "Sab" ],
@@ -19,7 +19,7 @@ function imprimir(){
 $(document).ready(function(){
   // Bloqueamos el SELECT de los cursos
   $("#slt-horarios").prop('disabled', true);
-  
+
 //codigo alternativo para el change function del datepicker
   /*$(".datepicker").datepicker({
     onSelect: function(dateText) {
@@ -37,18 +37,22 @@ $(document).ready(function(){
         var horarios = $("#slt-horarios");
 
         // Guardamos el select de alumnos
+        var id_tramite = document.getElementById('id_tramite').value;
         var cal = $.datepicker.formatDate( "yy-mm-dd", $( "#datepicker" ).datepicker( "getDate" ) );//$(this);
-       if(cal != ''){
+       if(cal != '' && id_tramite !=''){
             $.ajax({
-                data: { fecha : cal },
+                data: {
+                  fecha : cal,
+                  id : id_tramite
+                },
                 url:   './Controller/hora_controller.php',
                 type:  'POST',
                 dataType: 'json',
-                beforeSend: function () 
+                beforeSend: function ()
                 {
                     //alumnos.prop('disabled', true);
                 },
-                success:  function (r) 
+                success:  function (r)
                 {
                     //alumnos.prop('disabled', false);
 
@@ -63,7 +67,7 @@ $(document).ready(function(){
                 },
                 error: function()
                 {
-                    alert('Ocurrio un error al obtener el horario,Porfavor intentelo mas tardes');
+                    alert('Ocurrio un error al obtener el horario, Porfavor intentelo mas tardes');
                     //alumnos.prop('disabled', false);
                 }
             });

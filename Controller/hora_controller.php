@@ -1,6 +1,7 @@
 <?php
 //Obtenemos la fecha a evaluar
 $fechaconsulta = $_POST['fecha'];
+$id = $_POST['id'];
 //Determinamos los horarios para poder sacar el intervalo de horarios
 $entrada = '07:00:00';
 $salida = '14:00:00';
@@ -12,7 +13,7 @@ require_once('../Models/hora_model.php');
 //instancio la clase hora_model
 $HORA = new hora_model();
 //obtengo los horarios y el numero de estos
-$Ocupado = $HORA->get_horarios($fechaconsulta);
+$Ocupado = $HORA->get_horarios($fechaconsulta, $id);
 $num = $HORA->get_num_result();
 //converto el intervalo a segundos
 $convierte = $intervalo * 60;
@@ -33,7 +34,7 @@ else */
 }
 foreach ($Horario as $hora) {
 	$T=1;
-	for ($a=0; $a < $num; $a++) { 
+	for ($a=0; $a < $num; $a++) {
 		if ($hora == $Ocupado[$a]) {
 			$T = 0;
 		}
