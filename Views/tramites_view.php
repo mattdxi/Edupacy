@@ -6,7 +6,7 @@
 ================================================== -->
   <body>
        <ol class="breadcrumb">
-              <li><a href="./index.html">Inicio</a></li>
+              <li><a href="./index.php">Inicio</a></li>
               <li class="active">Tramites</li>
         </ol>
       <div class="container-fluid table-tramite">
@@ -31,7 +31,7 @@
                   $Estado2 = "";
                   echo "<tr>";
                 }
-                
+
                 echo "<td>";
                 echo $dato["tramite"];
                 echo "</td>";

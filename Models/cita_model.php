@@ -88,7 +88,8 @@ class cita_model{
     }
     public function get_cita($id_cita){
         $id = mysqli_real_escape_string($this->db, $id_tramite);
-        $consulta=$this->db->query("select * from cita where id_cita={$id};");
+        $query ="select *, tramite from cita INNER join tramites ON tramites.id=cita.id_tramites where cita.id_cita={$id};";
+        $consulta=$this->db->query($query);
         while($filas=$consulta->fetch_assoc()){
           $this->cita[]=$filas;
         }

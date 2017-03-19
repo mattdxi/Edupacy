@@ -9,13 +9,16 @@
       $Contenido= "./Controller/tramite_controller.php";
       break;
   case 'Acerca':
-    $Contenido = "";
+    $Contenido = "./Controller/acerca_controller.php";
     break;
   case 'Contacto':
-    $Contenido = "";
+    $Contenido = "./Controller/contacto_controller.php";
     break;
   case 'Cita':
     $Contenido = "./Controller/cita_controller.php";
+    break;
+  case 'Consulta':
+    $Contenido = "./Controller/consulta_controller.php";
     break;
 
   default:
@@ -32,7 +35,7 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="../../favicon.ico">
+    <link rel="icon" href="./Views/img/favicon.ico">
 
     <title>Registro Civil</title>
 
@@ -65,7 +68,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
               </button>
-              <a class="navbar-brand" href="#">EDUPACY</a>
+              <a class="navbar-brand" href="index.php">EDUPACY</a>
             </div>
             <div id="navbar" class="navbar-collapse collapse">
               <ul class="nav navbar-nav">
