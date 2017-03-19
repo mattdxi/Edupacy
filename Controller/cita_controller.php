@@ -1,7 +1,5 @@
 <?php
-//Llamada al modelo
-require_once("./Models/cita_model.php");
-$cita=new cita_model();
+error_reporting(E_ALL ^ E_NOTICE);
 //Recuperacion de de los datos enviados por post
 $id_tramite = $_POST['id_tramite'];
 $id_cita = $_POST['id_cita'];
@@ -11,11 +9,14 @@ $nombres =$_POST['nombres'];
 $apellidos = $_POST['apellidos'];
 $telefonos = $_POST['telefonos'];
 $Op = $_POST['Opcion'];
+$cita;
 //comprobacion de llamado
-if (empty($Op)) {
+if(empty($Op)) {
   //Llamada a la vista
   require_once("./Views/cita_view.php");
 }else {
+  require_once("../Models/cita_model.php");
+  $cita = new cita_model();
   header("Content-Type: application/json");
   //Variable de resultado
   $resultado;
@@ -34,10 +35,6 @@ if (empty($Op)) {
       break;
     case '5':
       $resultado = $cita->delete_cita($id_cita);
-      break;
-
-    default:
-      # code...
       break;
   }
   echo json_encode($resultado);

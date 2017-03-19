@@ -13,17 +13,15 @@ $(function() {
     monthNamesShort: [ "Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic" ]
   });
 });
-function imprimir(){
-  document.getElementById('msj').innerHTML=$.datepicker.formatDate( "yy-mm-dd", $( "#datepicker" ).datepicker( "getDate" ) );
-}
 $(document).ready(function(){
   // Bloqueamos el SELECT de los cursos
   $("#slt-horarios").prop('disabled', true);
+  $("#Reservar").prop('disabled', true);
+  $("#Cambiar").prop('disabled', true);
     // Hacemos la lógica que cuando nuestro calendario cambie de valor haga algo
     $("#datepicker").change(function(){
         // Guardamos el select de cursos
         var horarios = $("#slt-horarios");
-
         // Guardamos el select de alumnos
         var id_tramite = document.getElementById('id_tramite').value;
         var cal = $.datepicker.formatDate( "yy-mm-dd", $( "#datepicker" ).datepicker( "getDate" ) );//$(this);
@@ -42,17 +40,17 @@ $(document).ready(function(){
                 },
                 success:  function (r)
                 {
-                    //alumnos.prop('disabled', false);
                     // Limpiamos el select
                     horarios.find('option').remove();
                     $(r).each(function(i, v){ // indice, valor
                         horarios.append('<option value="' + v + '">' + v+ '</option>');
                     })
                     horarios.prop('disabled', false);
+                    $("#Reservar").prop('disabled', false);
                 },
                 error: function()
                 {
-                  Mensaje("Ocurrio un error al obtener el horario, Porfavor intentelo mas tardes");
+                  Mensaje("Ocurrio un error al obtener el horario, Porfavor intentelo mas tarde");
                 }
             });
         }
@@ -63,46 +61,50 @@ $(document).ready(function(){
         }
     });
 
-    // Hacemos la lógica que cuando nuestro SELECT cambia de valor haga algo
-    $("#datepicker").change(function(){
-        // Guardamos el select de cursos
+    // Hacemos la lógica que cuando nuestro boton sea seleccionado funcione
+    $("#Reservar").click(function(){
         var horarios = $("#slt-horarios");
-
-        // Guardamos el select de alumnos
-        var id_tramite = document.getElementById('id_tramite').value;
-        var cal = $.datepicker.formatDate( "yy-mm-dd", $( "#datepicker" ).datepicker( "getDate" ) );//$(this);
-       if(cal != '' && id_tramite !=''){
+        var hora2 = $("#slt-horarios").val();
+        var Op = 1;
+        var id_tramite2 = document.getElementById('id_tramite').value;
+        var cal = $.datepicker.formatDate( "yy-mm-dd", $( "#datepicker" ).datepicker( "getDate" ) );
+       if(cal != '' && id_tramite2 !='' && hora2 != ''){
             $.ajax({
                 data: {
                   fecha : cal,
-                  id : id_tramite
+                  id_tramite : id_tramite2,
+                  hora : hora2,
+                  Opcion : Op
                 },
-                url:   './Controller/hora_controller.php',
+                url:   './Controller/cita_controller.php',
                 type:  'POST',
                 dataType: 'json',
                 beforeSend: function ()
                 {
-                    //alumnos.prop('disabled', true);
                 },
                 success:  function (r)
                 {
-                    //alumnos.prop('disabled', false);
-
-                    // Limpiamos el select
+                  console.log(r);
+                  if (r['estado'] == 1) {
+                    $("#id_cita").val(r['id_cita']);
+                    alert("Tiene 2 min para completar el formulario");
+                    $("#Cambiar").prop('disabled', false);
+                    $("#Reservar").prop('disabled', true);
+                    horarios.prop('disabled', true);
+                    $( "#datepicker" ).datepicker( "option", "disabled", true );
+                  }else if (r['estado'] == 0) {
+                    Mensaje("Horario ya ocupado por otro usuario, Porfavor intentelo con otra hora");
                     horarios.find('option').remove();
-
-                    $(r).each(function(i, v){ // indice, valor
-                        horarios.append('<option value="' + v + '">' + v+ '</option>');
-                    })
-
-                    horarios.prop('disabled', false);
+                    horarios.prop('disabled', true);
+                    $("#Reservar").prop('disabled', true);
+                  }
                 },
                 error: function()
                 {
-                    alert('Ocurrio un error al obtener el horario, Porfavor intentelo mas tardes');
-                    //alumnos.prop('disabled', false);
+                  Mensaje("Ocurrio un error al conectar con el servidor, Porfavor intentelo mas tarde");
                 }
             });
+
         }
         else
         {

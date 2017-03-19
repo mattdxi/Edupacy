@@ -1,9 +1,13 @@
 <?php
-require_once("./db/db.php");
+require_once("../db/db.php");
 class cita_model{
     private $db;
     private $cita;
     private $id_cita;
+    private $mensaje = array(
+    "estado" => 0,
+    "id_cita" => 0
+    );
     public function __construct(){
         $this->db=Conectar::conexion();
         $this->cita=array();
@@ -11,8 +15,8 @@ class cita_model{
     public function set_cita($fecha_,$hora_, $id_tramite){
       $fecha= mysqli_real_escape_string($this->db, $fecha_);
       $hora= mysqli_real_escape_string($this->db, $hora_);
-      $id= mysqli_real_escape_string($this->db, $id_);
-      $query ="insert into cita (fecha, hora, id_tramitess)
+      $id= mysqli_real_escape_string($this->db, $id_tramite);
+      $query ="insert into cita (fecha, hora, id_tramites)
               SELECT * FROM (SELECT '{$fecha}', '{$hora}', '{$id}') AS tmp
               WHERE NOT EXISTS (select id_cita,fecha, hora, nombre, especificacion from cita inner join tramites
           on cita.id_tramites = tramites.id INNER JOIN departamento on departamento.id_depa=tramites.id_departamento
@@ -20,15 +24,15 @@ class cita_model{
           and fecha='{$fecha}' and hora='{$hora}'
       ) LIMIT 1;";
       $consulta=$this->db->query($query);
-      if ($consulta->affected_rows > 0) {
-        $this->id_cita = $consulta->insert_id;
-        mysqli_free_result($consulta);
-        mysqli_close($this->db);
-        return $this->id_cita;        //si la consulta fue correcta nos devuelve el id de la cita recien creada
+      if (($this->db->affected_rows) > 0) {
+        $this->id_cita = $this->db->insert_id;
+        $this->mensaje['id_cita'] = $this->db->insert_id;
+        $this->mensaje['estado'] = 1;
+        return $this->mensaje;        //si la consulta fue correcta nos devuelve el id de la cita recien creada
       }
-      mysqli_free_result($consulta);
-      mysqli_close($this->db);
-      return 0;                       //Si no, nos devuelve el valor 0
+      //mysqli_free_result($consulta);
+      //mysqli_close($this->db);
+      return $this->mensaje;                       //Si no, nos devuelve el valor 0
     }
     public function update_cita($id_cita, $nombres_, $apellidos_, $telefonos_){
       $id= mysqli_real_escape_string($this->db, $id_cita);

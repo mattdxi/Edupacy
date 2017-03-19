@@ -25,8 +25,8 @@
                 </div>
                 <div class="col-sm-4">
                   <div class="form-group">
-                    <input class="btn btn-primary" type="button" value="Reservar Horario">
-                    <input class="btn btn-warning" type="button" value="Cambiar Horario">
+                    <input class="btn btn-primary" type="button" value="Reservar Horario" id="Reservar">
+                    <input class="btn btn-warning" type="button" value="Cambiar Horario" id="Cambiar">
                   </div>
                 </div>
               </div>
@@ -36,7 +36,7 @@
                 <h3 class="panel-title">Paso 2: Llena tus Datos</h3>
               </div>
               <div class="panel-body">
-              <div class="form-horizontal" onsubmit="return Verificar()">
+              <div class="form-horizontal">
                 <input type="hidden" value="<?php echo $_GET['Tramite']?>" id="id_tramite">
                 <input type="hidden" value="" id="id_cita">
                 <div class="form-group">
@@ -63,7 +63,7 @@
                 <div class="form-group">
                   <div class="col-sm-12">
                     <center>
-                      <button type="submit" class="btn btn-success ">Registrar Cita</button>
+                      <button type="submit" class="btn btn-success" id="Registro">Registrar Cita</button>
                     </center>
                   </div>
                 </div>
