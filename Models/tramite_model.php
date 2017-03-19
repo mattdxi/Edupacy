@@ -11,13 +11,14 @@ class tramite_model{
     );
     private $mensaje2 = array("Descripcion" => "Ningun Tramite Seleccionado",
     );
- 
+
     public function __construct(){
         $this->db=Conectar::conexion();
         $this->tramite=array();
         $this->requisitos=array();
     }
     public function get_tramite($id_tramite){
+        $this->db=Conectar::conexion();
         if (empty($id_tramite)) {
             return $this->mensaje;
         }else{
@@ -26,11 +27,14 @@ class tramite_model{
             while($filas=$consulta->fetch_assoc()){
                 $this->tramite[]=$filas;
             }
+            mysqli_free_result($consulta);
+            mysqli_close($this->db);
             return $this->tramite;
         }
-        
+
     }
     public function get_requisitos($id_tramite){
+        $this->db=Conectar::conexion();
         if (empty($id_tramite)) {
             return $this->mensaje2;
         }else{
@@ -39,6 +43,8 @@ class tramite_model{
             while($filas=$consulta->fetch_assoc()){
                 $this->requisitos[]=$filas;
             }
+            mysqli_free_result($consulta);
+            mysqli_close($this->db);
             return $this->requisitos;
         }
     }

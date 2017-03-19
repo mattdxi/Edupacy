@@ -31,14 +31,16 @@
                 echo $reqs["Descripcion"];
                 echo "</li>";
                 echo "</ol>";
-                echo "<center><a class='btn btn-primary {$Estado}' href='?Opcion=Cita' role='button'>Agendar Cita</a></center>";
+                echo "<center><a class='btn btn-primary {$Estado}' href='#' role='button'>Agendar Cita</a></center>";
             }else{
               $Estado;
+              $id;
               foreach ($datos as $dato) {
                 if ($dato["estado"]=="0") {
                   $Estado = "disabled";
                 }else{
                   $Estado = "";
+                  $id = $dato["id"];
                 }
                 echo "<h1 class='featurette-heading'>";
                 echo $dato["tramite"];
@@ -54,7 +56,7 @@
                 echo "</li>";
               }
               echo "</ol>";
-              echo "<center><a class='btn btn-primary {$Estado}' href='?Opcion=Cita' role='button'>Agendar Cita</a></center>";
+              echo "<center><a class='btn btn-primary {$Estado}' href='?Opcion=Cita&Tramite={$id}' role='button'>Agendar Cita</a></center>";
             }
           ?>
       </div>

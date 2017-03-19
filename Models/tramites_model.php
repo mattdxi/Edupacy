@@ -3,7 +3,7 @@ require_once("./db/db.php");
 class tramites_model{
     private $db;
     private $tramites;
- 
+
     public function __construct(){
         $this->db=Conectar::conexion();
         $this->tramites=array();
@@ -13,6 +13,8 @@ class tramites_model{
         while($filas=$consulta->fetch_assoc()){
             $this->tramites[]=$filas;
         }
+        mysqli_free_result($consulta);
+        mysqli_close($this->db);
         return $this->tramites;
     }
 }

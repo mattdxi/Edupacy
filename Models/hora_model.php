@@ -4,7 +4,7 @@ class hora_model{
     private $db;
     private $horarios;
     private $numero_result=0;
- 
+
     public function __construct(){
         $this->db=Conectar::conexion();
         $this->horarios=array();
@@ -19,6 +19,8 @@ class hora_model{
             $this->horarios[]=mktime($Xhoras, $Xminutos, $Xsegundos, 0, 0, 0);
         }
         $this->numero_result = $consulta->num_rows;
+        mysqli_free_result($consulta);
+        mysqli_close($this->db);
         return $this->horarios;
     }
     public function get_num_result(){

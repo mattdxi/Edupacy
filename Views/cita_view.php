@@ -21,13 +21,13 @@
                   <div class="form-group form-inline">
                     <label>Seleccione un Horario</label>
                     <select id="slt-horarios" class="form-control"></select>
-                  </div> 
+                  </div>
                 </div>
                 <div class="col-sm-4">
                   <div class="form-group">
                     <input class="btn btn-primary" type="button" value="Reservar Horario">
                     <input class="btn btn-warning" type="button" value="Cambiar Horario">
-                  </div> 
+                  </div>
                 </div>
               </div>
           </div>
@@ -40,23 +40,23 @@
                 <div class="form-group">
                   <label class="col-sm-2 control-label">Solicitante:</label>
                   <div class="col-sm-2">
-                      <input id="Nombres" type="text" class="form-control" placeholder="Nombres">
+                      <input id="Nombres" type="text" class="form-control" placeholder="Nombres" required>
                   </div>
                   <div class="col-sm-2">
-                      <input id="ApellidoP" type="text" class="form-control" placeholder="Apellido Paterno">
+                      <input id="ApellidoP" type="text" class="form-control" placeholder="Apellido Paterno" required>
                   </div>
                   <div class="col-sm-2">
-                      <input id="ApellidoM" type="text" class="form-control" placeholder="Apellido Materno">
+                      <input id="ApellidoM" type="text" class="form-control" placeholder="Apellido Materno" required>
                   </div>
                 </div>
                 <div class="form-group">
                   <label class="col-sm-2 control-label">Telefono</label>
                   <div class="col-sm-6">
-                      <input type="tel" id="Celular" class="form-control" placeholder="Celular" pattern="[0-9]{10}">
+                      <input type="tel" id="Celular" class="form-control" placeholder="Celular" pattern="[0-9]{10}" required>
                   </div>
                 </div>
                 <div class="form-group">
-                 
+
                 </div>
                 <div class="form-group">
                   <div class="col-sm-12">
