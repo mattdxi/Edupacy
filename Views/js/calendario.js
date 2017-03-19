@@ -15,7 +15,38 @@ $(function() {
 });
 $(document).ready(function(){
   $("#Registro").click(function(){
-    Verificar();
+    if(Verificar()){
+      var op = 2;
+      var id_cita_ = document.getElementById('id_cita').value;
+      var nombres_ = document.getElementById('Nombres').value;;
+      var apellidos_ = document.getElementById('ApellidoP').value + document.getElementById('ApellidoM').value;
+      var telefonos_ = document.getElementById('Celular').value;
+      $.ajax({
+          data: {
+            nombres : nombres_,
+            apellidos : apellidos_,
+            telefonos : telefonos_,
+            Opcion : op,
+            id_cita : id_cita_
+          },
+          url:   './Controller/cita_controller.php',
+          type:  'POST',
+          dataType: 'json',
+          beforeSend: function ()
+          {
+          },
+          success:  function (r)
+          {
+            setTimeout(function () {
+               window.location.href = "blog.html"; //will redirect to your blog page (an ex: blog.html)
+            }, 2000); //will call the function after 2 secs.
+          },
+          error: function()
+          {
+            Mensaje("Ocurrio un error al obtener el horario, Porfavor intentelo mas tarde");
+          }
+      });
+    }
   });
   $("#slt-horarios").prop('disabled', true);
   $("#Reservar").prop('disabled', true);
