@@ -1,9 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-  </head>
-<!-- NAVBAR
-================================================== -->
   <body>
        <ol class="breadcrumb">
               <li><a href="./index.php">Inicio</a></li>
@@ -47,4 +41,3 @@
           ?>
         </table>
   </body>
-</html>

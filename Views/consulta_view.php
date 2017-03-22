@@ -1,7 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-  </head>
   <body>
        <ol class="breadcrumb">
               <li><a href="index.php">Inicio</a></li>
@@ -65,6 +61,7 @@
                 echo $dato["telefono"];
                 echo "</td>";
                 echo "<td>";
+                echo "<a class='btn btn-info btn-sm' href='./PDF/index.php?id_cita={$_GET['id_cita']}' role='button' target='_blank'>Imprimir</a>";
                 echo "<a class='btn btn-warning btn-sm' href='?Opcion=Cita&Tramite={$dato['id_tramites']}&id_cita={$_GET['id_cita']}' role='button'>Modificar</a>";
                 echo "<input id='cancelar' type='button' class='btn btn-danger btn-sm' value='Cancelar'>";
                 echo "</td>";
@@ -77,4 +74,3 @@
         </div>
       </div>
   </body>
-</html>

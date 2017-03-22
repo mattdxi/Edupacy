@@ -1,14 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-  </head>
-<!-- NAVBAR
-================================================== -->
   <body>
        <ol class="breadcrumb">
               <li><a href="./index.php">Inicio</a></li>
               <li><a href="?Opcion=Tramites">Tramites</a></li>
-              <li class="active">Registro de Nacimiento</li>
+              <li class="active"><?php echo ($falta_id == "si") ? "" : "{$datos['tramite']}"; ?></li>
        </ol>
       <div class="container-fluid">
 
@@ -61,4 +55,3 @@
           ?>
       </div>
   </body>
-</html>
