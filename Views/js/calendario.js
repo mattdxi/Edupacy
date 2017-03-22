@@ -14,12 +14,94 @@ $(function() {
   });
 });
 $(document).ready(function(){
+  //manejo del boton modificar de consulta view en consultar
+  if (document.getElementById('id_cita') != null) {
+    var id_cita_ = document.getElementById('id_cita').value;
+    var horarios = $("#slt-horarios");
+    var op = 4;
+    $.ajax({
+        data: {
+          id_cita : id_cita_,
+          Opcion : op
+        },
+        url:   './Controller/cita_controller.php',
+        type:  'POST',
+        dataType: 'json',
+        beforeSend: function ()
+        {
+        },
+        success:  function (r)
+        {
+          $("#Cambiar").prop('disabled', false);
+          $("#slt-horarios").prop('disabled', true);
+          $("#Reservar").prop('disabled', true);
+          $('#Registro').prop('disabled',true);
+          $("#datepicker").datepicker("disable");
+          document.getElementById('Nombres').value=r[0]['nombres'];
+          document.getElementById('Apellidos').value=r[0]['apellidos'];
+          document.getElementById('Celular').value=r[0]['telefono'];
+
+          horarios.append('<option value="' + r[0]['hora'] + '">' +r[0]['hora']+ '</option>');
+        },
+        error: function()
+        {
+          Mensaje("Ocurrio un error al obtener los datos de la cita, Porfavor intentelo mas tarde");
+        }
+    });
+  }else {
+    //dejamos todo por default
+    $("#slt-horarios").prop('disabled', true);
+    $("#Reservar").prop('disabled', true);
+    $("#Cambiar").prop('disabled', true);
+    $('#Registro').prop('disabled',true);
+  }
+  //Manejo del boton cancelar de la consulta view
+  if (document.getElementById('cancelar') != null) {
+    $("#cancelar").click(function(){
+      $('html, body').animate({ scrollTop: 0 }, 'slow');
+      document.getElementById("mensaje").innerHTML = "<div class='alert alert-danger'>"+
+        "<a href='#' class='close' data-dismiss='alert'>&times;</a>"+
+            "<p><strong>Alerta!:</strong> ¿Desea cancelar su cita?</p>"+
+            "<p><button id='ConfiCancelar' type='button' class='btn btn-danger'>Si</button>"+
+            "<button type='button' class='btn btn-info' data-dismiss='alert'>No</button></p></div>";
+            $("#ConfiCancelar").click(function(){
+              var id_ = document.getElementById('folio').value;
+              var op = 5;
+              $.ajax({
+                  data: {
+                    id_cita : id_,
+                    Opcion : op
+                  },
+                  url:   './Controller/cita_controller.php',
+                  type:  'POST',
+                  dataType: 'json',
+                  beforeSend: function ()
+                  {
+                  },
+                  success:  function (r)
+                  {
+                    $('html, body').animate({ scrollTop: 0 }, 'slow');
+                    document.getElementById("mensaje").innerHTML = "<div class='alert alert-success'>"+
+                			"<a href='#' class='close' data-dismiss='alert'>&times;</a>"+
+                	        "<strong>Exito!:</strong> Cita cancelada correctamente :) Redireccionando . . .</div>";
+                    setTimeout(function () {
+                      window.location.replace("./index.php");
+                    }, 3000); ///despues de 3 seg
+                  },
+                  error: function()
+                  {
+                    Mensaje("Ocurrio un error al cancelar la cita, Porfavor intentelo mas tarde");
+                  }
+              });
+            });
+    });
+  }
   $("#Registro").click(function(){
     if(Verificar()){
       var op = 2;
       var id_cita_ = document.getElementById('id_cita').value;
-      var nombres_ = document.getElementById('Nombres').value;;
-      var apellidos_ = document.getElementById('ApellidoP').value + document.getElementById('ApellidoM').value;
+      var nombres_ = document.getElementById('Nombres').value;
+      var apellidos_ = document.getElementById('Apellidos').value;
       var telefonos_ = document.getElementById('Celular').value;
       $.ajax({
           data: {
@@ -34,23 +116,28 @@ $(document).ready(function(){
           dataType: 'json',
           beforeSend: function ()
           {
+            $('#Registro').prop('disabled',true);
+            $("#Cambiar").prop('disabled', true);
           },
           success:  function (r)
           {
+            $('html, body').animate({ scrollTop: 0 }, 'slow');
+            document.getElementById("mensaje").innerHTML = "<div class='alert alert-success'>"+
+        			"<a href='#' class='close' data-dismiss='alert'>&times;</a>"+
+        	        "<strong>Exito!:</strong> Cita agendada correctamente :) Redireccionando . . .</div>";
             setTimeout(function () {
-               window.location.href = "blog.html"; //will redirect to your blog page (an ex: blog.html)
-            }, 2000); //will call the function after 2 secs.
+              window.location.replace("./index.php?Opcion=Consulta&id_cita="+ document.getElementById('id_cita').value);
+            }, 3000); ///despues de 3 seg
           },
           error: function()
           {
-            Mensaje("Ocurrio un error al obtener el horario, Porfavor intentelo mas tarde");
+            Mensaje("Ocurrio un error al agendar su cita, Porfavor intentelo mas tarde");
+            $('#Registro').prop('disabled',false);
+            $("#Cambiar").prop('disabled', false);
           }
       });
     }
   });
-  $("#slt-horarios").prop('disabled', true);
-  $("#Reservar").prop('disabled', true);
-  $("#Cambiar").prop('disabled', true);
     // Hacemos la lógica que cuando nuestro calendario cambie de valor haga algo
     $("#datepicker").change(function(){
         // Guardamos el select de cursos
@@ -121,6 +208,7 @@ $(document).ready(function(){
                   success:  function (r)
                   {
                     Verificar_Respuesta(r);
+                    $('#Registro').prop('disabled',false);
                   },
                   error: function()
                   {
@@ -179,16 +267,12 @@ $(document).ready(function(){
 
 function Verificar(){
 	nombre = document.getElementById('Nombres').value;
-	AParterno = document.getElementById('ApellidoP').value;
-	AMaterno = document.getElementById('ApellidoM').value;
+	Apellidos = document.getElementById('Apellidos').value;
 	telefono = document.getElementById('Celular').value;
 	if( nombre == null || nombre.length == 0 || /^\s+$/.test(nombre)) {
 		Mensaje("");
 	 	return false;
-	}else if (AParterno == null || AParterno.length == 0 || /^\s+$/.test(AParterno) ) {
-		Mensaje("");
-		return false;
-	}else if (AMaterno == null || AMaterno.length == 0 || /^\s+$/.test(AMaterno) ) {
+	}else if (Apellidos == null || Apellidos.length == 0 || /^\s+$/.test(Apellidos) ) {
 		Mensaje("");
 		return false;
 	}else if (telefono == null || telefono.length == 0 || /^\s+$/.test(telefono) || isNaN(telefono)) {
@@ -199,7 +283,7 @@ function Verificar(){
 		Mensaje("Nombres demasiados largos");
 		return false;
 	}
-	if ((AParterno.length + AMaterno.length) > 30) {
+	if ((Apellidos.length) > 30) {
 		Mensaje("Apellidos demasiados largos");
 		return false;
 	}
@@ -239,6 +323,7 @@ function Verificar_Respuesta(R){
     $("#slt-horarios").prop('disabled', true);
   }
 }
+
 //Agregar verificacion de limites de caracteres que soporta la bd
 //checar expresiones regulares en javascript
 //verificar y cerrar las conexiones despues de las consultas a las bd

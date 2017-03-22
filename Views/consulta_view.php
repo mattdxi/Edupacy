@@ -9,21 +9,23 @@
               <li class="active">Consulta de Cita</li>
        </ol>
       <div class="container-fluid table-tramite">
+        <div id="mensaje"></div>
         <h1>Consulta de Cita</h1>
         <div class="panel panel-primary">
         <div class="panel-heading">Paso 1: Ingresa tus datos</div>
           <div class="panel-body">
-            <div class="form-group">
+            <form class="form-group" action="?Opcion=Consulta" method="get">
               <label class="col-sm-2 control-label">Solicitante:</label>
+              <input name='Opcion' type="hidden" value="Consulta">
               <div class="col-sm-2">
-                  <input id="folio" type="text" class="form-control" placeholder="Folio de Cita" required>
+                  <input name='id_cita' id="folio" type="text" class="form-control" placeholder="Folio de Cita" value="<?php echo $_GET['id_cita'] ?>" required>
               </div>
               <div class="col-sm-2">
                 <center>
-                  <input id="buscar" type="button" class="btn btn-info btn-sm" value="Buscar">
+                  <input id="buscar" type="submit" class="btn btn-info btn-sm" value="Buscar">
                 </center>
               </div>
-            </div>
+            </form>
           </div>
         </div>
         <div class="panel panel-primary">
@@ -41,7 +43,8 @@
               echo  "<th>Nombres</th>";
               echo  "<th>Apellidos</th>";
               echo  "<th>Telefono</th>";
-              echo "</tr>";
+              echo  "<th>Acciones</th>";
+              echo  "</tr>";
               foreach ($datos as $dato) {
                 echo "<td>";
                 echo $dato["fecha"];
@@ -61,9 +64,12 @@
                 echo "<td>";
                 echo $dato["telefono"];
                 echo "</td>";
+                echo "<td>";
+                echo "<a class='btn btn-warning btn-sm' href='?Opcion=Cita&Tramite={$dato['id_tramites']}&id_cita={$_GET['id_cita']}' role='button'>Modificar</a>";
+                echo "<input id='cancelar' type='button' class='btn btn-danger btn-sm' value='Cancelar'>";
+                echo "</td>";
                 echo "</tr>";
               }
-              echo "<center><a class='btn btn-primary' href='#' role='button'>Agendar Cita</a></center>";
             }
           ?>
           </table>

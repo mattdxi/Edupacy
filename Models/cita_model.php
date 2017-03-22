@@ -87,7 +87,7 @@ class cita_model{
       return $this->mensaje;                       //Si no, nos devuelve el valor 0
     }
     public function get_cita($id_cita){
-        $id = mysqli_real_escape_string($this->db, $id_tramite);
+        $id = mysqli_real_escape_string($this->db, $id_cita);
         $query ="select *, tramite from cita INNER join tramites ON tramites.id=cita.id_tramites where cita.id_cita={$id};";
         $consulta=$this->db->query($query);
         while($filas=$consulta->fetch_assoc()){
@@ -98,7 +98,7 @@ class cita_model{
         return $this->cita;
     }
     public function delete_cita($id_cita){
-        $id = mysqli_real_escape_string($this->db, $id_tramite);
+        $id = mysqli_real_escape_string($this->db, $id_cita);
         $consulta=$this->db->query("delete from cita where id_cita={$id};");
         if ($consulta->affected_rows > 0) {
           $this->mensaje['id_cita'] = $id_cita;
