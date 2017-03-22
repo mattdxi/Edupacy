@@ -15,7 +15,7 @@
       break;
 
     default:
-      $Contenido = '';
+      $Contenido = "./Controllers/citas_controller.php";
       break;
   }
   require_once("./Views/inicio_view.php");

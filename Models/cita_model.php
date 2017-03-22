@@ -1,5 +1,5 @@
 <?php
-require_once("../db/db.php");
+require_once("../DB/db.php");
 class cita_model{
     private $db;
     private $cita;

@@ -7,10 +7,10 @@
         <tr>
         <th>RFC</th>
         <th>Nombres</th>
-        <th>Tramite</th>
-        <th>Nombres</th>
         <th>Apellidos</th>
-        <th>Folio</th>
+        <th>Direccion</th>
+        <th>CURP</th>
+        <th>Seguro Social</th>
         <th>Acciones</th>
         </tr>
       </tr>
