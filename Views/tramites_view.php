@@ -1,13 +1,13 @@
   <body>
        <ol class="breadcrumb">
               <li><a href="./index.php">Inicio</a></li>
-              <li class="active">Tramites</li>
+              <li class="active">Tr&aacute;mites</li>
         </ol>
       <div class="container-fluid table-tramite">
-        <h1>Tramites</h1>
+        <h1>Tr&aacute;mites</h1>
         <table class="table table-hover">
           <tr>
-            <th>Tramite</th>
+            <th>Tr&aacute;mite</th>
             <th>Especificacion</th>
             <th>Estado</th>
             <th>Link</th>

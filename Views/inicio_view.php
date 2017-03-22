@@ -37,7 +37,7 @@
       <div class="row featurette">
         <div class="col-md-7">
           <h2 class="featurette-heading">Registro Civil<span class="text-muted"> | En linea.</span></h2>
-          <p class="lead">Plataforma creada para poder agilizar los tramites del registro civil...<a class="btn btn-default" href="?Opcion=Acerca" role="button">Ver mas</a></p>
+          <p class="lead">Plataforma creada para poder agilizar los tr&aacute;mites del registro civil...<a class="btn btn-default" href="?Opcion=Acerca" role="button">Ver mas</a></p>
         </div>
         <div class="col-md-5">
           <img class="featurette-image img-responsive center-block" src="./Views/img/slider1.png" alt="Generic placeholder image">

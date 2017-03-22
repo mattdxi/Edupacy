@@ -73,7 +73,7 @@
             <div id="navbar" class="navbar-collapse collapse">
               <ul class="nav navbar-nav">
                 <li><a href="index.php">Inicio</a></li>
-                <li><a href="?Opcion=Tramites">Tramites</a></li>
+                <li><a href="?Opcion=Tramites">Tr&aacute;mites</a></li>
                 <li><a href="?Opcion=Acerca">Acerca de</a></li>
                 <li><a href="?Opcion=Contacto">Contacto</a></li>
               </ul>

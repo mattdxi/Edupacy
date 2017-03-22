@@ -1,7 +1,7 @@
   <body>
        <ol class="breadcrumb">
               <li><a href="index.php">Inicio</a></li>
-              <li><a href="?Opcion=Tramites">Tramites</a></li>
+              <li><a href="?Opcion=Tramites">Tr&aacute;mites</a></li>
               <li class="active">Consulta de Cita</li>
        </ol>
       <div class="container-fluid table-tramite">
@@ -25,7 +25,7 @@
           </div>
         </div>
         <div class="panel panel-primary">
-        <div class="panel-heading">Resultados de Busqueda:</div>
+        <div class="panel-heading">Resultados de B&uacute;squeda:</div>
           <div class="panel-body">
             <table class="table">
           <?php

@@ -6,7 +6,7 @@
   <body >
        <ol class="breadcrumb">
               <li><a href="./index.php">Inicio</a></li>
-              <li><a href="?Opcion=Tramites">Tramites</a></li>
+              <li><a href="?Opcion=Tramites">Tr&aacute;mites</a></li>
               <li class="active">Cita</li>
         </ol>
         <div class="container-fluid">
