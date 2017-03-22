@@ -1,6 +1,7 @@
 <?php
 //Llamada al modelo
 session_start();
+error_reporting(E_ALL ^ E_NOTICE);
 $rfc = $_POST['Rfc'];
 $pass = $_POST['Pass'];
 $salir = $_POST['Salir'];
@@ -22,7 +23,7 @@ if(!empty($rfc) && !empty($pass)){
   session_unset();
   // destroy the session
   session_destroy();
-  
+
 }else{
   require_once("./Views/login_view.php");
 }

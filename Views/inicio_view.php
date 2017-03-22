@@ -7,18 +7,23 @@
 
       <!-- Three columns of text below the carousel -->
       <div class="row">
-        <div class="col-lg-4">
-          <img class="img-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="140" height="140">
+        <div class="col-lg-4"><a href="?Opcion=Tramites">
+          <img class="img-circle" src="./Views/img/cita.png" alt="Generic placeholder image" width="140" height="140">
+        </a>
           <h2>Haz tu cita</h2>
           <p><a class="btn btn-default" href="?Opcion=Tramites" role="button">Ver</a></p>
         </div><!-- /.col-lg-4 -->
         <div class="col-lg-4">
-          <img class="img-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="140" height="140">
+          <a href="?Opcion=Consulta">
+          <img class="img-circle" src="./Views/img/buscar.png" alt="Generic placeholder image" width="140" height="140">
+        </a>
           <h2>Consulta tu cita</h2>
           <p><a class="btn btn-default" href="?Opcion=Consulta" role="button">Ver</a></p>
         </div><!-- /.col-lg-4 -->
         <div class="col-lg-4">
-          <img class="img-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="140" height="140">
+          <a href="?Opcion=Contacto">
+          <img class="img-circle" src="./Views/img/ubicacion.png" alt="Generic placeholder image" width="140" height="140">
+        </a>
           <h2>Ubicanos</h2>
           <p><a class="btn btn-default" href="?Opcion=Contacto" role="button">Ver</a></p>
         </div><!-- /.col-lg-4 -->

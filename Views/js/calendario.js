@@ -19,35 +19,40 @@ $(document).ready(function(){
     var id_cita_ = document.getElementById('id_cita').value;
     var horarios = $("#slt-horarios");
     var op = 4;
-    $.ajax({
-        data: {
-          id_cita : id_cita_,
-          Opcion : op
-        },
-        url:   './Controller/cita_controller.php',
-        type:  'POST',
-        dataType: 'json',
-        beforeSend: function ()
-        {
-        },
-        success:  function (r)
-        {
-          $("#Cambiar").prop('disabled', false);
-          $("#slt-horarios").prop('disabled', true);
-          $("#Reservar").prop('disabled', true);
-          $('#Registro').prop('disabled',true);
-          $("#datepicker").datepicker("disable");
-          document.getElementById('Nombres').value=r[0]['nombres'];
-          document.getElementById('Apellidos').value=r[0]['apellidos'];
-          document.getElementById('Celular').value=r[0]['telefono'];
+    if(id_cita.length > 0){
+      $.ajax({
+          data: {
+            id_cita : id_cita_,
+            Opcion : op
+          },
+          url:   './Controller/cita_controller.php',
+          type:  'POST',
+          dataType: 'json',
+          beforeSend: function ()
+          {
+          },
+          success:  function (r)
+          {
+            $("#Cambiar").prop('disabled', false);
+            $("#slt-horarios").prop('disabled', true);
+            $("#Reservar").prop('disabled', true);
+            $('#Registro').prop('disabled',true);
+            $("#datepicker").datepicker("disable");
+            document.getElementById('Nombres').value=r[0]['nombres'];
+            document.getElementById('Apellidos').value=r[0]['apellidos'];
+            document.getElementById('Celular').value=r[0]['telefono'];
 
-          horarios.append('<option value="' + r[0]['hora'] + '">' +r[0]['hora']+ '</option>');
-        },
-        error: function()
-        {
-          Mensaje("Ocurrio un error al obtener los datos de la cita, Porfavor intentelo mas tarde");
-        }
-    });
+            horarios.append('<option value="' + r[0]['hora'] + '">' +r[0]['hora']+ '</option>');
+          },
+          error: function(eR, textStatus, errorThrown)
+          {
+            console.log(eR);
+            console.log(textStatus);
+            console.log(errorThrown);
+            Mensaje("Ocurrio un error al obtener los datos de la cita, Porfavor intentelo mas tarde");
+          }
+      });
+    }
   }else {
     //dejamos todo por default
     $("#slt-horarios").prop('disabled', true);
