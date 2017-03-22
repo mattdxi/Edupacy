@@ -46,9 +46,6 @@ $(document).ready(function(){
           },
           error: function(eR, textStatus, errorThrown)
           {
-            console.log(eR);
-            console.log(textStatus);
-            console.log(errorThrown);
             Mensaje("Ocurrio un error al obtener los datos de la cita, Porfavor intentelo mas tarde");
           }
       });
@@ -262,6 +259,7 @@ $(document).ready(function(){
     });
     $("#Cambiar").click(function(){
         $('#op').val(6);
+        cancelar();
         $("#Reservar").prop('disabled', true);
         $("#Cambiar").prop('disabled', true);
         $("#datepicker").datepicker("enable");
@@ -317,7 +315,7 @@ function Verificar_Respuesta(R){
   r = R;
   if (r['estado'] == 1) {
     $("#id_cita").val(r['id_cita']);
-    alert("Tiene 2 min para completar el formulario");
+    apagar();
     $("#Cambiar").prop('disabled', false);
     $("#Reservar").prop('disabled', true);
     $("#slt-horarios").prop('disabled', true);
@@ -328,7 +326,69 @@ function Verificar_Respuesta(R){
     $("#slt-horarios").prop('disabled', true);
   }
 }
+var t;
+var min = 120;
+var d=new Date();
+function interval(){
+    t=1;
+    contador = setInterval(function(){
+        document.getElementById("testdiv").innerHTML=minutos(min-t++) +" restante";
+    },1000,"JavaScript");
+}
+var timout;
+function apagar(){
+  $('html, body').animate({ scrollTop: 0 }, 'slow');
+  document.getElementById("mensaje").innerHTML = "<div class='alert alert-success'>"+
+    "<a href='#' class='close' data-dismiss='alert'>&times;</a>"+
+        "<strong>Exito!:</strong> Tiene 2 min para Completar su cita</div>";
+        interval();
+    timout=setTimeout(function(){
+        Mensaje("Cita no completada")
+        var id_ = document.getElementById('id_cita').value;
+        var op = 5;
+        $.ajax({
+            data: {
+              id_cita : id_,
+              Opcion : op
+            },
+            url:   './Controller/cita_controller.php',
+            type:  'POST',
+            dataType: 'json',
+            beforeSend: function ()
+            {
+            },
+            success:  function (r)
+            {
+              $('html, body').animate({ scrollTop: 0 }, 'slow');
+              document.getElementById("mensaje").innerHTML = "<div class='alert alert-success'>"+
+                "<a href='#' class='close' data-dismiss='alert'>&times;</a>"+
+                    "<strong>Exito!:</strong> Cita cancelada por favor intentelo nuevamente</div>";
+            },
+            error: function()
+            {
+              Mensaje("Ocurrio un error al cancelar la cita, Porfavor intentelo mas tarde");
+            }
+        });
+        location.reload();
+    },120000,"JavaScript");
+}
+function cancelar(){
+    clearTimeout(timout);
+    clearInterval(contador);
+    document.getElementById("testdiv").innerHTML="Seleccione otra fecha y horario";
+}
+function minutos(time){
+  var minutes = Math.floor( (time % 3600) / 60 );
+  var seconds = time % 60;
 
+  //Anteponiendo un 0 a los minutos si son menos de 10
+  minutes = minutes < 10 ? '0' + minutes : minutes;
+
+  //Anteponiendo un 0 a los segundos si son menos de 10
+  seconds = seconds < 10 ? '0' + seconds : seconds;
+
+  return result = minutes + ":" + seconds;
+}
 //Agregar verificacion de limites de caracteres que soporta la bd
 //checar expresiones regulares en javascript
 //verificar y cerrar las conexiones despues de las consultas a las bd

@@ -28,6 +28,7 @@
                     <input class="btn btn-primary" type="button" value="Reservar Horario" id="Reservar">
                     <input class="btn btn-warning" type="button" value="Cambiar Horario" id="Cambiar">
                   </div>
+                  <div id="testdiv"></div>
                 </div>
               </div>
           </div>
